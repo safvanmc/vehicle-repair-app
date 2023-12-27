@@ -483,7 +483,7 @@ class _MechServicesState extends State<MechServices> {
                                       color: Colors.red),
                                   child: Center(
                                     child: Text(
-                                      'Payment pending ',
+                                      'Pay',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 12.r,
@@ -583,7 +583,7 @@ class _MechServicesState extends State<MechServices> {
                             ],
                           ),
                           Container(
-                            width: 130.w,
+                            width: 125.w,
                             height: 40.h,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
