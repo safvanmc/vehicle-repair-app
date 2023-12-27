@@ -90,63 +90,70 @@ class _UserrequestState extends State<Userrequest> {
               ),
             ),
             Expanded(
-              child: Container(
-                width: double.infinity,
-                color: Colors.white,
-                child: Column(children: [
-                  Expanded(
-                    child: TabBarView(children: [
-                      Usermechlist2(),
-                      Usermechlist(),
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    color: Colors.white,
+                    child: Column(children: [
+                      Expanded(
+                        child: TabBarView(children: [
+                          Usermechlist2(),
+                          Usermechlist(),
+                        ]),
+                      ),
                     ]),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                            left: 45, right: 45, bottom: 40, top: 30)
-                        .r,
-                    child: Container(
-                      height: 50.h,
-                      width: 300.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          color: Color(0xFFCEE2FF)),
-                      child: TabBar(
-                        labelColor: Colors.white,
-                        unselectedLabelColor: Colors.black,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        indicatorWeight: 0,
-                        indicator: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          color: Color(0xFF2357D9),
+                  Positioned(
+                    bottom: 20,
+                    left: 20,
+                    right: 20,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Container(
+                        height: 50.h,
+                        width: 300.w,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                            color: Color(0xFFCEE2FF)),
+                        child: TabBar(
+                          labelColor: Colors.white,
+                          unselectedLabelColor: Colors.black,
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          indicatorWeight: 0,
+                          indicator: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                            color: Color(0xFF2357D9),
+                          ),
+                          tabs: [
+                            Tab(
+                                child: Text(
+                              'Requests',
+                              style: TextStyle(
+                                // color: Colors.white,
+                                fontSize: 16.sp,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                                height: 0.h,
+                              ),
+                            )),
+                            Tab(
+                                child: Text(
+                              'Request',
+                              style: TextStyle(
+                                // color: Colors.black,
+                                fontSize: 16.sp,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                                height: 0.h,
+                              ),
+                            ))
+                          ],
                         ),
-                        tabs: [
-                          Tab(
-                              child: Text(
-                            'Requests',
-                            style: TextStyle(
-                              // color: Colors.white,
-                              fontSize: 16.sp,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                              height: 0.h,
-                            ),
-                          )),
-                          Tab(
-                              child: Text(
-                            'Request',
-                            style: TextStyle(
-                              // color: Colors.black,
-                              fontSize: 16.sp,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                              height: 0.h,
-                            ),
-                          ))
-                        ],
                       ),
                     ),
                   ),
-                ]),
+                ],
               ),
             ),
           ],
