@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDIQL0N9qKjvyC1hRJ7GGGnLwYKWdFmocI',
-    appId: '1:845958045986:web:4aab796bce28fce4ffc57b',
-    messagingSenderId: '845958045986',
-    projectId: 'safwanmc-d4c28',
-    authDomain: 'safwanmc-d4c28.firebaseapp.com',
-    storageBucket: 'safwanmc-d4c28.appspot.com',
-    measurementId: 'G-Z3FYY1WJD1',
+    apiKey: 'AIzaSyCjUOP3xEYkSegv9b0aekITJDugGQd_7a8',
+    appId: '1:861507235377:web:85a603ee7abf211c5d2f10',
+    messagingSenderId: '861507235377',
+    projectId: 'vehicle-42f66',
+    authDomain: 'vehicle-42f66.firebaseapp.com',
+    storageBucket: 'vehicle-42f66.appspot.com',
+    measurementId: 'G-K4ZX4D83N7',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCzKErwzA18bstws8nucvJS46v9BQZsNRo',
-    appId: '1:845958045986:android:793803d3bea966a7ffc57b',
-    messagingSenderId: '845958045986',
-    projectId: 'safwanmc-d4c28',
-    storageBucket: 'safwanmc-d4c28.appspot.com',
+    apiKey: 'AIzaSyAG56M5KabBHerisRFsQx8xHyqEj30uyaU',
+    appId: '1:861507235377:android:dcc77130ef65d2425d2f10',
+    messagingSenderId: '861507235377',
+    projectId: 'vehicle-42f66',
+    storageBucket: 'vehicle-42f66.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBxkCfUR266LJk2iAvYPFJBrka0nKsbiIc',
-    appId: '1:845958045986:ios:a2b7ad1badcc74f4ffc57b',
-    messagingSenderId: '845958045986',
-    projectId: 'safwanmc-d4c28',
-    storageBucket: 'safwanmc-d4c28.appspot.com',
+    apiKey: 'AIzaSyB7yjMHFnRWPAIvdg1H27RmSswk-4tSIcQ',
+    appId: '1:861507235377:ios:f4319d8dfe1a4b295d2f10',
+    messagingSenderId: '861507235377',
+    projectId: 'vehicle-42f66',
+    storageBucket: 'vehicle-42f66.appspot.com',
     iosBundleId: 'com.example.vehicleRepair',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBxkCfUR266LJk2iAvYPFJBrka0nKsbiIc',
-    appId: '1:845958045986:ios:111d63d46b1c09faffc57b',
-    messagingSenderId: '845958045986',
-    projectId: 'safwanmc-d4c28',
-    storageBucket: 'safwanmc-d4c28.appspot.com',
+    apiKey: 'AIzaSyB7yjMHFnRWPAIvdg1H27RmSswk-4tSIcQ',
+    appId: '1:861507235377:ios:2da3cbbe236af33c5d2f10',
+    messagingSenderId: '861507235377',
+    projectId: 'vehicle-42f66',
+    storageBucket: 'vehicle-42f66.appspot.com',
     iosBundleId: 'com.example.vehicleRepair.RunnerTests',
   );
 }
