@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vehicle_repair/user/profilesettings.dart';
 import 'package:vehicle_repair/user/usermechlist.dart';
 import 'package:vehicle_repair/user/userrequest.dart';
 
@@ -12,12 +13,13 @@ class Usersignup extends StatefulWidget {
   State<Usersignup> createState() => _UsersignupState();
 }
 
+final formkey = GlobalKey<FormState>();
+
 class _UsersignupState extends State<Usersignup> {
   final name = TextEditingController();
   final phone = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
-  final formkey = GlobalKey<FormState>();
 
   Future<void> uploadData() async {
     await FirebaseFirestore.instance.collection('users').add({
@@ -29,7 +31,7 @@ class _UsersignupState extends State<Usersignup> {
     }).then((value) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Userrequest(),
+          builder: (context) => SetProfile(),
         )));
   }
 
@@ -106,6 +108,7 @@ class _UsersignupState extends State<Usersignup> {
                       ),
                       TextFormField(
                         controller: name,
+                        keyboardType: TextInputType.multiline,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Empty field';
@@ -158,6 +161,7 @@ class _UsersignupState extends State<Usersignup> {
                       ),
                       TextFormField(
                         controller: phone,
+                        keyboardType: TextInputType.phone,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Empty feild';

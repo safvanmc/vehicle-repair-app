@@ -6,7 +6,8 @@ import 'package:vehicle_repair/adminhome/adminnotification.dart';
 import 'package:vehicle_repair/adminhome/adminpayment.dart';
 
 class Bottomnav extends StatefulWidget {
-  const Bottomnav({super.key});
+  int index;
+  Bottomnav({super.key, required this.index});
 
   @override
   State<Bottomnav> createState() => _BottomnavState();
@@ -14,6 +15,13 @@ class Bottomnav extends StatefulWidget {
 
 class _BottomnavState extends State<Bottomnav> {
   int selectedindex = 0;
+  @override
+  void initState() {
+    setState(() {
+      selectedindex = widget.index;
+    });
+  }
+
   static List Safwidgets = [AdminHome(), Adminpayment(), AdminNotify()];
   @override
   Widget build(BuildContext context) {

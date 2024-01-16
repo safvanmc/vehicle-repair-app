@@ -20,7 +20,9 @@ class _AdminloginState extends State<Adminlogin> {
     if (a.text == 'admin' && b.text == 'admin123') {
       Navigator.pushReplacement(context, MaterialPageRoute(
         builder: (context) {
-          return Bottomnav();
+          return Bottomnav(
+            index: 0,
+          );
         },
       ));
     } else {
