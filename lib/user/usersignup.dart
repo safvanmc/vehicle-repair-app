@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vehicle_repair/user/profilesettings.dart';
 import 'package:vehicle_repair/user/usermechlist.dart';
 import 'package:vehicle_repair/user/userrequest.dart';
@@ -13,26 +14,32 @@ class Usersignup extends StatefulWidget {
   State<Usersignup> createState() => _UsersignupState();
 }
 
-final formkey = GlobalKey<FormState>();
-
 class _UsersignupState extends State<Usersignup> {
+  final formkey = GlobalKey<FormState>();
   final name = TextEditingController();
   final phone = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
 
   Future<void> uploadData() async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'name': name.text,
-      'password': password.text,
-      'email': email.text,
-      'phone number': phone.text,
-      'status': 0,
-    }).then((value) => Navigator.push(
+    //   await FirebaseFirestore.instance.collection('users').add({
+    //     'name': name.text,
+    //     'password': password.text,
+    //     'email': email.text,
+    //     'phone number': phone.text,
+    //     'status': 0,
+    //     'url': ''
+    //   });
+
+    Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SetProfile(),
-        )));
+          builder: (context) => SetProfile(
+              name: name.text,
+              password: password.text,
+              email: email.text,
+              phonenumber: phone.text),
+        ));
   }
 
   @override
@@ -161,7 +168,7 @@ class _UsersignupState extends State<Usersignup> {
                       ),
                       TextFormField(
                         controller: phone,
-                        keyboardType: TextInputType.phone,
+                        keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Empty feild';

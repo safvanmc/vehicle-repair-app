@@ -72,6 +72,11 @@ class _UserloginState extends State<Userlogin> {
                 ),
                 TextFormField(
                   controller: username,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'empty feild';
+                    }
+                  },
                   decoration: InputDecoration(
                       hintText: 'Username',
                       hintStyle: TextStyle(
@@ -85,6 +90,9 @@ class _UserloginState extends State<Userlogin> {
                       contentPadding:
                           EdgeInsets.only(left: 19, top: 14.5, bottom: 14.5).r,
                       fillColor: Colors.white,
+                      errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red),
+                          borderRadius: BorderRadius.circular(10.r)),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.r),
                           borderSide: BorderSide.none)),
@@ -107,6 +115,11 @@ class _UserloginState extends State<Userlogin> {
                 ),
                 TextFormField(
                   controller: password,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'empty feild';
+                    }
+                  },
                   decoration: InputDecoration(
                       hintText: 'Enter Password',
                       hintStyle: TextStyle(
@@ -120,6 +133,9 @@ class _UserloginState extends State<Userlogin> {
                       contentPadding:
                           EdgeInsets.only(left: 19, top: 14.5, bottom: 14.5).r,
                       fillColor: Colors.white,
+                      errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red),
+                          borderRadius: BorderRadius.circular(10.r)),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.r),
                           borderSide: BorderSide.none)),
@@ -229,44 +245,57 @@ class _UserloginState extends State<Userlogin> {
   var name;
   var email;
   var phone;
+  var imgurl;
+  var status;
 
   getData() async {
     if (formkey.currentState?.validate() ?? false) {
       final QuerySnapshot<Map<String, dynamic>> mechSnapshot =
           await FirebaseFirestore.instance
               .collection('users')
-              .where('name', isEqualTo: username.text)
-              .where('password', isEqualTo: password.text)
-              .where('status', isEqualTo: 1)
+              // .where('name', isEqualTo: username.text)
+              // .where('password', isEqualTo: password.text)
+              // .where('status', isEqualTo: 1)
               .get();
+      if (mechSnapshot.docs[0]['name'] == username.text &&
+          mechSnapshot.docs[0]['password'] == password.text) {
+        if (mechSnapshot.docs[0]['status'] == 1) {
+          if (mechSnapshot.docs.isNotEmpty) {
+            setState(() {
+              userId = mechSnapshot.docs[0].id;
+              name = mechSnapshot.docs[0]['name'];
+              email = mechSnapshot.docs[0]['email'];
+              phone = mechSnapshot.docs[0]['phone number'];
+              imgurl = mechSnapshot.docs[0]['url'];
+            });
+            print('---------------$email');
 
-      if (mechSnapshot.docs.isNotEmpty) {
-        setState(() {
-          userId = mechSnapshot.docs[0].id;
-          name = mechSnapshot.docs[0]['name'];
-          email = mechSnapshot.docs[0]['email'];
-          phone = mechSnapshot.docs[0]['phone number'];
-        });
-        print('---------------$email');
+            SharedPreferences spref = await SharedPreferences.getInstance();
+            spref.setString('userid', userId);
+            spref.setString('username', name);
+            spref.setString('email', email);
+            spref.setString('phone number', phone);
+            spref.setString('url', imgurl);
 
-        SharedPreferences spref = await SharedPreferences.getInstance();
-        spref.setString('userid', userId);
-        spref.setString('username', name);
-        spref.setString('email', email);
-        spref.setString('phone number', phone);
+            // var un = spref.getString('username');
+            // print('---------------$un');
 
-        var un = spref.getString('username');
-        print('---------------$un');
+            // var em = spref.getString('email');
+            // var pn = spref.getString('phone number');
+            var ur = spref.getString('url');
+            print('----------------$ur');
 
-        var em = spref.getString('email');
-        var pn = spref.getString('phone number');
-
-        Fluttertoast.showToast(msg: 'Login Successfully as user');
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Userrequest(),
+            Fluttertoast.showToast(msg: 'Login Successfully as user');
+            Navigator.pushReplacement(context, MaterialPageRoute(
+              builder: (context) {
+                return Userrequest(url: ur.toString());
+              },
             ));
+          }
+        }
+        if (mechSnapshot.docs[0]['status'] == 0) {
+          Fluttertoast.showToast(msg: 'Request pending..');
+        }
       } else {
         showDialog(
           context: context,

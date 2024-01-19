@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Userprofile extends StatefulWidget {
@@ -21,23 +22,27 @@ class _UserprofileState extends State<Userprofile> {
     super.initState();
   }
 
-  var un;
-  var em;
-  var pn;
-  var id;
+  var un = '';
+  var em = '';
+  var pn = '';
+  var id = '';
+  var ur;
 
   Future<void> getData() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
     setState(() {
-      un = spref.getString('username');
-      em = spref.getString('email');
-      pn = spref.getString('phone number');
-      id = spref.getString('userid');
+      un = spref.getString('username').toString();
+      em = spref.getString('email').toString();
+      pn = spref.getString('phone number').toString();
+      id = spref.getString('userid').toString();
+      ur = spref.getString('url');
 
       username.text = un ?? '';
       phoneNumber.text = pn ?? '';
       email.text = em ?? '';
+      // ur=
     });
+    print(ur);
   }
 
   updateData() async {
@@ -46,10 +51,11 @@ class _UserprofileState extends State<Userprofile> {
     spref.setString('phone number', phoneNumber.text);
     spref.setString('email', email.text);
 
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(id)
-        .update({'name': username.text});
+    FirebaseFirestore.instance.collection('users').doc(id).update({
+      'name': username.text,
+      'phone number': phoneNumber.text,
+      'email': email.text
+    });
   }
 
   @override
@@ -80,13 +86,17 @@ class _UserprofileState extends State<Userprofile> {
                 Center(
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/Ellipse 2.png'),
-                        backgroundColor: Color(0xFFE7F0FF),
-                        radius: 50.r,
-                      ),
+                      ur == null
+                          ? CircleAvatar(
+                              backgroundColor: Color(0xFFE7F0FF),
+                              radius: 50.r,
+                            )
+                          : CircleAvatar(
+                              backgroundImage: NetworkImage(ur.toString()),
+                              radius: 50.r,
+                            ),
                       SizedBox(height: 10.h),
-                      Text('Name'),
+                      Text(un, style: TextStyle(fontSize: 20.sp)),
                     ],
                   ),
                 ),
@@ -161,6 +171,7 @@ class _UserprofileState extends State<Userprofile> {
                         ),
                         child: TextFormField(
                           controller: phoneNumber,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintStyle: TextStyle(

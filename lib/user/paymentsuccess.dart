@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vehicle_repair/user/userrequest.dart';
 
 class Paymentsuccess extends StatefulWidget {
@@ -11,6 +12,12 @@ class Paymentsuccess extends StatefulWidget {
 }
 
 class _PaymentsuccessState extends State<Paymentsuccess> {
+  var ur;
+  getdata() async {
+    SharedPreferences spref = await SharedPreferences.getInstance();
+    ur = spref.getString('url');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,8 +60,7 @@ class _PaymentsuccessState extends State<Paymentsuccess> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Userrequest(),
-                      ));
+                          builder: (context) => Userrequest(url: ur)));
                 },
                 child: Container(
                   width: 249.w,

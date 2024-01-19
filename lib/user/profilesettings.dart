@@ -1,14 +1,26 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vehicle_repair/user/userlogin.dart';
 import 'package:vehicle_repair/user/userrequest.dart';
 import 'package:path/path.dart';
 
 class SetProfile extends StatefulWidget {
-  const SetProfile({super.key});
+  SetProfile({
+    super.key,
+    required this.name,
+    required this.password,
+    required this.email,
+    required this.phonenumber,
+  });
+  String name;
+  String password;
+  String email;
+  String phonenumber;
 
   @override
   State<SetProfile> createState() => _SetProfileState();
@@ -47,6 +59,14 @@ class _SetProfileState extends State<SetProfile> {
     } catch (e) {
       print('Error uploading image:$e');
     }
+    FirebaseFirestore.instance.collection('users').add({
+      'name': widget.name,
+      'password': widget.password,
+      'email': widget.email,
+      'phone number': widget.phonenumber,
+      'status': 0,
+      'url': imageUrl
+    });
   }
 
   @override
@@ -89,7 +109,7 @@ class _SetProfileState extends State<SetProfile> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Userrequest(),
+                            builder: (context) => Userlogin(),
                           ));
                     },
                     child: Text('Save')),

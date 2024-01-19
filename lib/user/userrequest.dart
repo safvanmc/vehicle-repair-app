@@ -7,7 +7,11 @@ import 'package:vehicle_repair/user/usernotify.dart';
 import 'package:vehicle_repair/user/userprofile.dart';
 
 class Userrequest extends StatefulWidget {
-  const Userrequest({super.key});
+  Userrequest({
+    super.key,
+    required this.url,
+  });
+  String url;
 
   @override
   State<Userrequest> createState() => _UserrequestState();
@@ -44,7 +48,7 @@ class _UserrequestState extends State<Userrequest> {
                             ));
                       },
                       child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/Ellipse 2.png'),
+                        backgroundImage: NetworkImage(widget.url),
                       ),
                     ),
                     SizedBox(
